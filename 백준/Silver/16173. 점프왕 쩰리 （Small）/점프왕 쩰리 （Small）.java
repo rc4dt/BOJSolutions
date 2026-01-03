@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static int N;
+    static boolean[][] visited;
+    static int[] dx = {0, 1}, dy = {1, 0};
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[][] arr;
+
+        N = Integer.parseInt(br.readLine());
+        arr = new int[N][N];
+        visited = new boolean[N][N];
+
+        for(int i = 0; i < N; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for(int j = 0; j < N; j++){
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        visited[0][0] = true;
+        dfs(arr, 0,0);
+
+        System.out.println("Hing");
+
+    }
+
+
+    private static void dfs(int[][] arr, int i, int j){
+        if(arr[i][j] == -1){
+            System.out.println("HaruHaru");
+            System.exit(0);
+        }
+
+        for(int k = 0; k<2; k++){
+            int x = i + dx[k] * arr[i][j];
+            int y = j + dy[k] * arr[i][j];
+            if(x>=N || y>=N || visited[x][y]){
+                continue;
+            }
+
+            visited[x][y] = true;
+            dfs(arr, x,y);
+        }
+    }
+}
